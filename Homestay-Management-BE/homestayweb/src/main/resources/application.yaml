@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /homestay
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/goTravel"
+    username: root
+    password: Bachdepzai11
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: khoibene@gmail.com
+    password: nnwxlqdmiagihnro
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: "nL8Wk3q9TuXFeV+JkzAmYZcRpGfM2y8PvqLdWz3aHTG9eV7uKqV3lSn5eLZCq4US"
+  expiration: 86400000
+
+cloudinary:
+  cloud_name: deyu8aoef
+  api_key: 642675988451599
+  api_secret: 4IXsKibWyB2isTTkCWQ0oP7_l5s
+
+vnpay:
+  tmnCode: Q8CSPVFP
+  hashSecret: ZCI8YJYBU5DW2IYHHIA6XDMFJS5WJMB2
+  payUrl: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+#  returnUrl: http://localhost:8080/homestay/api/payment/vnpay-return
+  returnUrl: http://127.0.0.1:5500/payment-success.html

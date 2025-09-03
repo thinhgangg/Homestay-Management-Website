@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Liên Hệ - GoTravel</title>
+        <style>
+            body {
+                font-family: "Segoe UI", sans-serif;
+                margin: 0;
+                background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+                color: #333;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 20px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 3rem;
+                margin-bottom: 20px;
+                color: #222;
+                animation: slideIn 1s ease-out;
+                width: 100%;
+            }
+
+            .intro {
+                text-align: center;
+                font-size: 1.25rem;
+                margin-bottom: 50px;
+                color: #555;
+                animation: fadeIn 1.2s ease-out 0.2s backwards;
+                max-width: 700px;
+            }
+
+            .contact-info {
+                margin-bottom: 50px;
+                text-align: center;
+                font-size: 1.15rem;
+                line-height: 1.9;
+                animation: fadeInUp 1s ease-out 0.4s backwards;
+                max-width: 700px;
+            }
+
+            .contact-form {
+                background: #fff;
+                padding: 50px;
+                border-radius: 15px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                margin-bottom: 60px;
+                width: 100%;
+                max-width: 700px; /* Match map's max-width */
+                animation: scaleIn 1s ease-out 0.6s backwards;
+            }
+
+            .contact-form label {
+                display: block;
+                margin-top: 25px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                width: 94%;
+                padding: 15px 20px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                margin-top: 10px;
+                font-size: 1rem;
+                color: #333;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .contact-form input:focus,
+            .contact-form textarea:focus {
+                border-color: #4caf50;
+                box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+                outline: none;
+            }
+
+            .contact-form button {
+                margin-top: 25px;
+                padding: 15px 35px;
+                background: linear-gradient(45deg, #4caf50, #66bb6a);
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.25rem;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .contact-form button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            }
+
+            .map {
+                width: 100%;
+                max-width: 700px; /* Match contact-form's max-width */
+                animation: fadeInUp 1s ease-out 0.8s backwards;
+            }
+
+            .map iframe {
+                width: 100%;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                transition: transform 0.3s ease;
+            }
+
+            .map iframe:hover {
+                transform: scale(1.02);
+            }
+
+            /* Keyframe Animations */
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes scaleIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <section class="contact-section">
+            <div class="container">
+                <h1>Liên Hệ Với GoTravel</h1>
+                <p class="intro">
+                    Chúng tôi luôn sẵn sàng lắng nghe bạn. Dù bạn là du khách, chủ homestay hay đơn giản chỉ là người yêu khám phá – hãy kết nối với
+                    chúng tôi!
+                </p>
+
+                <div class="contact-info">
+                    <p><strong>Email:</strong> support@gotravel.vn</p>
+                    <p><strong>Điện thoại:</strong> 0909 123 456</p>
+                    <p><strong>Địa chỉ:</strong> 54 Nguyễn Lương Bằng, Hòa Khánh Bắc, Đà Nẵng</p>
+                </div>
+
+                <form class="contact-form">
+                    <label for="name">Họ và Tên</label>
+                    <input type="text" id="name" required />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required />
+
+                    <label for="message">Tin nhắn</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </form>
+
+                <div class="map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.8408061073624!2d108.14723921462384!3d16.07361998887664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a2b2b8f4d7%3A0x5e0b8c4f0b7e4e4a!2zNTQgTmd1eeG7hW4gTMawxqFuZyBC4bqhbmc!5e0!3m2!1svi!2s!4v1667841234567"
+                        width="100%"
+                        height="400"
+                        style="border: 0"
+                        allowfullscreen=""
+                        loading="lazy"
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

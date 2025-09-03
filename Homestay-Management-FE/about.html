@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Về Chúng Tôi - GoTravel</title>
+        <link rel="stylesheet" href="./assets/css/about.css" />
+    </head>
+    <body>
+        <header class="hero-banner">
+            <div class="overlay">
+                <div class="hero-text">
+                    <h1>GoTravel</h1>
+                    <p>Kết nối bạn với những homestay độc đáo khắp Đà Nẵng</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="about-section">
+            <div class="container">
+                <h1 class="title">Về Chúng Tôi</h1>
+                <p class="intro">Chúng tôi là cầu nối giữa những trái tim yêu khám phá và những mái nhà nhỏ bình yên khắp mọi miền đất nước.</p>
+
+                <div class="fade-section">
+                    <h2>Câu Chuyện Khởi Nguồn</h2>
+                    <p>
+                        Tất cả bắt đầu từ một chuyến đi miền núi phía Bắc năm 2019. Trong căn nhà sàn cũ kỹ nhưng ấm cúng của một người dân tộc Tày,
+                        chúng tôi nhận ra điều tuyệt vời nhất trong du lịch không chỉ là cảnh đẹp — mà là con người, văn hóa và sự kết nối.
+                    </p>
+                    <p>
+                        Vậy là GoTravel ra đời — với mong muốn giúp những homestay nhỏ lẻ có cơ hội tiếp cận khách hàng khắp nơi, và du khách được
+                        trải nghiệm nhiều hơn là một “phòng nghỉ”.
+                    </p>
+                </div>
+
+                <div class="fade-section">
+                    <h2>Sứ Mệnh</h2>
+                    <p>
+                        Chúng tôi tin rằng <strong>mỗi chuyến đi đều là một câu chuyện</strong>, và homestay chính là nơi câu chuyện ấy bắt đầu. Với
+                        hệ thống kết nối hàng ngàn homestay được chọn lọc kỹ càng, chúng tôi giúp bạn dễ dàng tìm kiếm, đặt chỗ và trải nghiệm những
+                        không gian mang đậm dấu ấn địa phương.
+                    </p>
+                </div>
+
+                <div class="fade-section">
+                    <h2>Giá Trị Cốt Lõi</h2>
+                    <ul>
+                        <li><strong>Chân thành:</strong> Luôn lắng nghe và đồng hành cùng cả chủ nhà lẫn du khách.</li>
+                        <li><strong>Chất lượng:</strong> Chọn lọc kỹ các homestay, cam kết dịch vụ minh bạch và uy tín.</li>
+                        <li><strong>Bản sắc:</strong> Đề cao sự độc đáo và văn hóa địa phương trong từng nơi lưu trú.</li>
+                        <li><strong>Bền vững:</strong> Hỗ trợ cộng đồng địa phương phát triển du lịch một cách có trách nhiệm.</li>
+                    </ul>
+                </div>
+
+                <div class="fade-section">
+                    <h2>Điểm Khác Biệt</h2>
+                    <ul>
+                        <li>Giao diện dễ dùng, đặt phòng nhanh chóng.</li>
+                        <li>Hỗ trợ 24/7 từ đội ngũ thân thiện.</li>
+                        <li>Luôn cập nhật những homestay độc đáo, ẩn mình.</li>
+                        <li>Blog du lịch chia sẻ cảm hứng và kinh nghiệm thực tế.</li>
+                    </ul>
+                </div>
+
+                <div class="fade-section">
+                    <h2>Đội Ngũ</h2>
+                    <p>
+                        Chúng tôi là những người trẻ đam mê công nghệ, du lịch và văn hóa địa phương. Tất cả cùng hướng đến một nền tảng du lịch nhân
+                        văn, nơi mỗi người đều có thể tìm thấy một không gian thuộc về mình.
+                    </p>
+                </div>
+
+                <div class="fade-section">
+                    <h2>Tầm Nhìn</h2>
+                    <p>
+                        Trở thành nền tảng homestay hàng đầu Việt Nam — không chỉ về quy mô, mà còn về chiều sâu kết nối văn hóa, con người và hành
+                        trình.
+                    </p>
+                </div>
+
+                <blockquote class="quote">
+                    “Tại GoTravel, chúng tôi không chỉ giúp bạn tìm một nơi để ngủ — mà là một nơi để mở lòng và lưu giữ kỷ niệm.”
+                </blockquote>
+
+                <div class="fade-section">
+                    <h2>Lời Cảm Ơn</h2>
+                    <p>
+                        Cảm ơn bạn đã tin tưởng và đồng hành cùng GoTravel. Mỗi hành trình của bạn chính là nguồn động lực lớn nhất để chúng tôi tiếp
+                        tục cố gắng.
+                    </p>
+                </div>
+
+                <div class="cta">
+                    <a href="homestay-list.html" class="btn">Khám phá Homestay</a>
+                </div>
+            </div>
+        </section>
+        <script>
+            // Fade-in effect when scrolling
+            const faders = document.querySelectorAll(".fade-section");
+            const appearOptions = {
+                threshold: 0.2,
+                rootMargin: "0px 0px -50px 0px",
+            };
+
+            const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("appear");
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            faders.forEach((fader) => {
+                appearOnScroll.observe(fader);
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4fdf9;
+    color: #2e2e2e;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+}
+
+.hero-banner {
+    position: relative;
+    height: 60vh;
+    background: url("../img/banner-homestay.webp") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* lớp phủ mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-text {
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.hero-text p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.about-section {
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.title {
+    font-size: 3rem;
+    color: #184e42;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.intro {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 30px 0 15px;
+    color: #1c6150;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+blockquote.quote {
+    font-style: italic;
+    background-color: #e6f7f1;
+    border-left: 4px solid #90d9c2;
+    padding: 20px;
+    margin: 40px 0;
+    color: #2e6654;
+    font-size: 1.1rem;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn {
+    background-color: #1c6150;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #14473b;
+    transform: scale(1.03);
+}
+
+/* Fade-in animation */
+.fade-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-section.appear {
+    opacity: 1;
+    transform: translateY(0);
+}

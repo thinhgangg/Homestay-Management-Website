@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển</title>
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css"/>
+    <link rel="stylesheet" href="assets/css/host-dashboard.css" />
+    <script src="assets/js/restrictPageAccess.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="container1">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
+            </div>
+            <nav class="nav">
+              <ul>
+                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                <li><a href="homestay-list.html">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
+        </div>
+
+        <div id="user-info" class="user-dropdown" style="display: none; position: relative">
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Sidebar Menu -->
+      <div class="sidebar">
+        <h2>Bảng điều khiển Host</h2>
+        <ul>
+          <li>
+            <a href="#" class="parent-toggle"
+              >Quản lý Homestay<span class="arrow-icon">▼</span></a
+            >
+            <ul class="homestay-list" style="display: none"></ul>
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="pending-approval-homestays"
+              >Đang chờ phê duyệt</a
+            >
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="manage-bookings"
+              >Quản lý đơn đặt phòng</a
+            >
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="approved-bookings"
+              >Đơn đặt phòng đã duyệt</a
+            >
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="add-homestay"
+              >Kinh doanh Homestay mới</a
+            >
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="revenue-stats"
+              >Thống kê doanh thu</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div id="loading" style="display: none">Đang tải...</div>
+
+        <div id="default-content" class="tab-content active">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/706/706797.png"
+            alt="Welcome"
+          />
+          <h1>Chào mừng bạn đến với GoTravel</h1>
+          <h3>Host Dashboard</h3>
+        </div>
+
+        <div>
+          <div id="view-all-room" class="tab-content">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Danh sách tất cả phòng</h2>
+              <table class="room-table">
+                <thead>
+                  <tr>
+                    <th>Mã phòng</th>
+                    <th>Loại phòng</th>
+                    <th>Giá</th>
+                    <th>Tình trạng phòng</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div
+            id="pending-approval-homestays"
+            class="tab-content"
+            style="display: none"
+          >
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Danh sách Homestay đang chờ phê duyệt</h2>
+              <table class="room-table">
+                <thead>
+                  <tr>
+                    <th>Tên Homestay</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày tạo</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="pending-homestay-list"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="approved-bookings" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Danh sách đơn đặt phòng đã duyệt</h2>
+              <table class="room-table">
+                <thead>
+                  <tr>
+                    <th>Tên Homestay</th>
+                    <th>Mã đặt phòng</th>
+                    <th>Mã phòng</th>
+                    <th>Email</th>
+                    <th>Thành tiền</th>
+                    <th>Ngày Check-in</th>
+                    <th>Ngày Check-out</th>
+                    <th>Ngày đặt</th>
+                  </tr>
+                </thead>
+                <tbody id="approved-booking-list"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="add-room" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Thêm phòng mới</h2>
+              <div class="form-group">
+                <label><strong>Loại phòng:</strong></label
+                ><br />
+                <label
+                  ><input type="radio" name="RoomType" value="Single" /> Single
+                  Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="RoomType" value="Superior" />
+                  Superior Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="RoomType" value="Deluxe" /> Deluxe
+                  Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="RoomType" value="Suite" /> Suite
+                  Room</label
+                >
+              </div>
+              <div class="form-group">
+                <label for="Price"><strong>Giá phòng (VNĐ):</strong></label>
+                <input
+                  type="number"
+                  name="Price"
+                  id="Price"
+                  required
+                  placeholder="Nhập giá..."
+                />
+              </div>
+              <div class="form-group">
+                <label><strong>Tiện nghi:</strong></label
+                ><br />
+                <label
+                  ><input type="checkbox" name="Facilities" value="Hồ bơi" />Hồ
+                  bơi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bãi đỗ xe"
+                  />Bãi đỗ xe</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Wifi"
+                  />Wifi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="TV"
+                  />TV</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Máy lạnh"
+                  />Máy lạnh</label
+                ><br />
+                <label
+                  ><input type="checkbox" name="Facilities" value="Tủ lạnh" />Tủ
+                  lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bếp riêng"
+                  />Bếp riêng</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Ban công"
+                  />Ban công</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Bồn tắm"
+                  />Bồn tắm</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="Facilities"
+                    value="Máy pha cà phê"
+                  />Máy pha cà phê</label
+                ><br />
+              </div>
+
+              <div class="form-group">
+                <label for="Image"><strong>Ảnh phòng:</strong></label>
+                <input
+                  type="file"
+                  name="Image"
+                  id="room-image"
+                  accept="image/*"
+                  multiple
+                />
+                <div id="preview-container"></div>
+              </div>
+              <input type="hidden" name="homestayId" id="HomestayId" />
+              <button type="button" class="btn btn-add" id="submit-room">
+                Thêm phòng
+              </button>
+            </div>
+          </div>
+
+          <div id="edit-room" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Sửa phòng</h2>
+              <div class="form-group">
+                <label><strong>Loại phòng:</strong></label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Single" />
+                  Single Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Superior" />
+                  Superior Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Deluxe" />
+                  Deluxe Room</label
+                ><br />
+                <label
+                  ><input type="radio" name="editRoomType" value="Suite" />
+                  Suite Room</label
+                >
+              </div>
+              <div class="form-group">
+                <label for="editPrice"><strong>Giá phòng (VNĐ):</strong></label>
+                <input type="number" id="editPrice" required />
+              </div>
+              <div class="form-group">
+                <label><strong>Tiện nghi:</strong></label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Hồ bơi"
+                  />Hồ bơi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bãi đỗ xe"
+                  />Bãi đỗ xe</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Wifi"
+                  />Wifi</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="TV"
+                  />TV</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Máy lạnh"
+                  />Máy lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Tủ lạnh"
+                  />Tủ lạnh</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bếp riêng"
+                  />Bếp riêng</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Ban công"
+                  />Ban công</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Bồn tắm"
+                  />Bồn tắm</label
+                ><br />
+                <label
+                  ><input
+                    type="checkbox"
+                    name="editFacilities"
+                    value="Máy pha cà phê"
+                  />Máy pha cà phê</label
+                ><br />
+              </div>
+              <div class="form-group">
+                <label for="editImage"><strong>Ảnh mới:</strong></label>
+                <input type="file" id="editImage" accept="image/*" />
+                <div id="edit-preview-container"></div>
+              </div>
+              <div class="set-availability form-group">
+                <label for="editRoomAvailability "><strong>Tình trạng phòng:</strong></label>
+                <select id="editRoomAvailability">
+                  <option value="true">Đang hoạt động</option>
+                  <option value="false">Đang sửa chữa</option>
+                </select>
+              </div>
+              <input type="hidden" id="editRoomId" />
+              <button type="button" class="btn btn-add" id="save-room-changes">
+                Lưu thay đổi
+              </button>
+            </div>
+          </div>
+
+          <div id="manage-bookings" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Quản lý đơn đặt phòng</h2>
+              <table class="room-table">
+                <thead>
+                  <tr>
+                    <th>Tên Homestay</th>
+                    <th>Mã phòng</th>
+                    <th>Email</th>
+                    <th>Ngày Check-in</th>
+                    <th>Ngày Check-out</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày đặt</th>
+                    <th>Thanh toán</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="booking-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="add-homestay" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Kinh doanh Homestay mới</h2>
+              <form id="add-homestay-form">
+                <div class="form-group">
+                  <label for="name"><strong>Tên Homestay:</strong></label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    required
+                    placeholder="Nhập tên homestay..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="street"
+                    ><strong>Địa chỉ (Số nhà, đường):</strong></label
+                  >
+                  <input
+                    type="text"
+                    name="street"
+                    id="street"
+                    required
+                    placeholder="Nhập địa chỉ..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="ward"><strong>Phường/Xã:</strong></label>
+                  <input
+                    type="text"
+                    name="ward"
+                    id="ward"
+                    required
+                    placeholder="Nhập phường/xã..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="district"><strong>Quận/Huyện:</strong></label>
+                  <input
+                    type="text"
+                    name="district"
+                    id="district"
+                    required
+                    placeholder="Nhập quận/huyện..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="description"><strong>Mô tả:</strong></label>
+                  <textarea
+                    name="description"
+                    id="description"
+                    required
+                    placeholder="Nhập mô tả homestay..."
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="homestay-images"
+                    ><strong>Thêm ảnh Homestay:</strong></label
+                  >
+                  <input
+                    type="file"
+                    name="homestay-images"
+                    id="homestay-images"
+                    accept="image/*"
+                    multiple
+                  />
+                  <div id="homestay-preview-container"></div>
+                </div>
+                <div class="form-group">
+                  <label for="contactInfo"
+                    ><strong>Thông tin liên hệ:</strong></label
+                  >
+                  <input
+                    type="text"
+                    name="contactInfo"
+                    id="contactInfo"
+                    required
+                    placeholder="example@gmail.com"
+                  />
+                </div>
+                <button type="submit" class="btn btn-add">Thêm Homestay</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="edit-homestay" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Chỉnh sửa Homestay</h2>
+              <form id="edit-homestay-form">
+                <div class="form-group">
+                  <label for="editName"><strong>Tên Homestay:</strong></label>
+                  <input
+                    type="text"
+                    name="editName"
+                    id="editName"
+                    required
+                    placeholder="Nhập tên homestay..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editStreet"
+                    ><strong>Địa chỉ (Số nhà, đường):</strong></label
+                  >
+                  <input
+                    type="text"
+                    name="editStreet"
+                    id="editStreet"
+                    required
+                    placeholder="Nhập địa chỉ..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editWard"><strong>Phường/Xã:</strong></label>
+                  <input
+                    type="text"
+                    name="editWard"
+                    id="editWard"
+                    required
+                    placeholder="Nhập phường/xã..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editDistrict"><strong>Quận/Huyện:</strong></label>
+                  <input
+                    type="text"
+                    name="editDistrict"
+                    id="editDistrict"
+                    required
+                    placeholder="Nhập quận/huyện..."
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editDescription"><strong>Mô tả:</strong></label>
+                  <textarea
+                    name="editDescription"
+                    id="editDescription"
+                    required
+                    placeholder="Nhập mô tả homestay..."
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="editHomestayImages"
+                    ><strong>Thêm ảnh Homestay mới:</strong></label
+                  >
+                  <input
+                    type="file"
+                    name="editHomestayImages"
+                    id="editHomestayImages"
+                    accept="image/*"
+                    multiple
+                  />
+                  <div id="edit-homestay-preview-container"></div>
+                </div>
+                <div class="form-group">
+                  <label for="editContactInfo"
+                    ><strong>Thông tin liên hệ:</strong></label
+                  >
+                  <input
+                    type="text"
+                    name="editContactInfo"
+                    id="editContactInfo"
+                    required
+                    placeholder="example@gmail.com"
+                  />
+                </div>
+                <input
+                  type="hidden"
+                  id="editHomestayId"
+                  name="editHomestayId"
+                />
+                <button type="submit" class="btn btn-add">Lưu thay đổi</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="revenue-stats" class="tab-content" style="display: none">
+            <div class="card-box">
+              <button class="close-btn" onclick="returnToDefault()">×</button>
+              <h2>Thống kê doanh thu theo Homestay</h2>
+              <canvas id="revenueChart" width="800" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script type="module" src="assets/js/host-homestay.js"></script>
+
+    <script>
+      const parentToggle = document.querySelector(".parent-toggle");
+      const homestayList = document.querySelector(".homestay-list");
+      const homestayToggles = document.querySelectorAll(".homestay-toggle");
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const defaultContent = document.getElementById("default-content");
+
+      parentToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        const isShown = homestayList.style.display === "block";
+        homestayList.style.display = isShown ? "none" : "block";
+
+        // Ẩn submenus nếu đóng
+        if (isShown) {
+          document
+            .querySelectorAll(".sub-menu")
+            .forEach((menu) => (menu.style.display = "none"));
+        }
+
+        // Toggle class để xoay icon
+        this.classList.toggle("open", !isShown);
+      });
+
+      // Xử lý sự kiện click cho homestay-toggle bằng event delegation
+      document
+        .querySelector(".homestay-list")
+        .addEventListener("click", function (e) {
+          const toggle = e.target.closest(".homestay-toggle");
+          if (!toggle) return; // Nếu không nhấp vào homestay-toggle, thoát
+
+          e.preventDefault();
+          const submenu = toggle.nextElementSibling;
+          const isShown =
+            submenu &&
+            submenu.classList.contains("sub-menu") &&
+            submenu.style.display === "block";
+
+          // Ẩn tất cả submenu của các homestay khác và xóa class active-homestay
+          document.querySelectorAll(".sub-menu").forEach((menu) => {
+            menu.style.display = "none";
+          });
+          document.querySelectorAll(".homestay-toggle").forEach((t) => {
+            t.classList.remove("active-homestay");
+          });
+
+          // Toggle submenu của homestay hiện tại
+          if (submenu && submenu.classList.contains("sub-menu")) {
+            submenu.style.display = isShown ? "none" : "block";
+            // Thêm class active-homestay nếu submenu được mở
+            if (!isShown) {
+              toggle.classList.add("active-homestay");
+              const firstTab = submenu.querySelector(".tab-link");
+              if (firstTab) firstTab.click();
+            }
+          }
+        });
+
+      document
+        .querySelector(".sidebar")
+        .addEventListener("click", function (e) {
+          const link = e.target.closest(".tab-link");
+          if (!link) return; // Nếu không nhấp vào tab-link, thoát
+
+          e.preventDefault();
+          const tabId = link.getAttribute("data-tab");
+
+          // Gọi hàm tương ứng với tab
+          if (tabId === "manage-bookings") {
+            loadPendingBookings();
+          } else if (tabId === "revenue-stats") {
+            loadRevenueStats();
+          }
+
+          // Ẩn tất cả nội dung tab
+          document.querySelectorAll(".tab-content").forEach((tab) => {
+            tab.classList.remove("active");
+            tab.style.display = "none";
+          });
+
+          // Bỏ active mặc định
+          const defaultContent = document.getElementById("default-content");
+          defaultContent.classList.remove("active");
+          defaultContent.style.display = "none";
+
+          // Hiện tab được chọn
+          const selectedTab = document.getElementById(tabId);
+          if (selectedTab) {
+            selectedTab.classList.add("active");
+            selectedTab.style.display = "block";
+          }
+
+          // Cập nhật trạng thái active cho tab-link
+          document
+            .querySelectorAll(".tab-link")
+            .forEach((l) => l.classList.remove("active-tab"));
+          link.classList.add("active-tab");
+
+          // Cập nhật trạng thái active cho homestay-toggle
+          document
+            .querySelectorAll(".homestay-toggle")
+            .forEach((toggle) => toggle.classList.remove("active-homestay"));
+          const parentHomestay =
+            link.closest("ul.sub-menu")?.previousElementSibling;
+          if (parentHomestay?.classList.contains("homestay-toggle")) {
+            parentHomestay.classList.add("active-homestay");
+          }
+        });
+
+      function returnToDefault() {
+        // 1. Ẩn tất cả nội dung tab
+        tabContents.forEach((tab) => tab.classList.remove("active"));
+
+        // 2. Hiện phần mặc định
+        defaultContent.classList.add("active");
+
+        // 3. Bỏ highlight tab con & homestay cha
+        tabLinks.forEach((l) => l.classList.remove("active-tab"));
+        homestayToggles.forEach((toggle) =>
+          toggle.classList.remove("active-homestay")
+        );
+
+        // 4. Thu gọn toàn bộ submenu trong sidebar
+        document
+          .querySelectorAll(".sub-menu")
+          .forEach((menu) => (menu.style.display = "none"));
+
+        // 5. Thu gọn danh sách homestay chính
+        homestayList.style.display = "none";
+      }
+
+      const imageInput = document.getElementById("room-image");
+      const previewContainer = document.getElementById("preview-container");
+
+      imageInput.addEventListener("change", function () {
+        previewContainer.innerHTML = "";
+
+        Array.from(this.files).forEach((file) => {
+          if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      const editImageInput = document.getElementById("editImage");
+      const editPreviewContainer = document.getElementById(
+        "edit-preview-container"
+      );
+
+      editImageInput.addEventListener("change", function () {
+        editPreviewContainer.innerHTML = "";
+
+        Array.from(this.files).forEach((file) => {
+          if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              editPreviewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      const homestayImageInput = document.getElementById("homestay-images");
+      const homestayPreviewContainer = document.getElementById(
+        "homestay-preview-container"
+      );
+
+      homestayImageInput.addEventListener("change", function () {
+        homestayPreviewContainer.innerHTML = "";
+
+        Array.from(this.files).forEach((file) => {
+          if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              img.classList.add("preview-image");
+              homestayPreviewContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      const editHomestayImageInput =
+        document.getElementById("editHomestayImages");
+      const editHomestayPreviewContainer = document.getElementById(
+        "edit-homestay-preview-container"
+      );
+
+      editHomestayImageInput.addEventListener("change", function () {
+        editHomestayPreviewContainer.innerHTML = "";
+
+        Array.from(this.files).forEach((file) => {
+          if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              img.classList.add("preview-image");
+              editHomestayPreviewContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      let chartInstance = null;
+      async function loadRevenueStats() {
+        const loadingElement = document.getElementById("loading");
+        loadingElement.style.display = "block";
+
+        try {
+          const token = localStorage.getItem("authToken");
+          if (!token) {
+            alert("Bạn chưa đăng nhập.");
+            loadingElement.style.display = "none";
+            return;
+          }
+          // Tạo promise cho thời gian chờ tối thiểu (500ms)
+          const minLoadingTime = new Promise((resolve) =>
+            setTimeout(resolve, 500)
+          );
+
+          const response = await fetch(
+            "http://localhost:8080/homestay/api/payment/stats/homestay",
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          // Đợi cả API và thời gian chờ tối thiểu hoàn tất
+          await Promise.all([minLoadingTime, response]);
+
+          if (!response.ok)
+            throw new Error(`HTTP error! status: ${response.status}`);
+          const data = await response.json();
+
+          const labels = data.map((item) => item.homestayName);
+          const revenues = data.map((item) => item.totalRevenue);
+          const ctx = document.getElementById("revenueChart").getContext("2d");
+
+          if (chartInstance) {
+            chartInstance.destroy();
+          }
+
+          chartInstance = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Doanh thu (VND)",
+                  data: revenues,
+                  backgroundColor: "rgba(75, 192, 192, 0.6)",
+                  borderColor: "rgba(75, 192, 192, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    callback: (value) => value.toLocaleString("vi-VN") + "₫",
+                  },
+                },
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: (ctx) =>
+                      `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString(
+                        "vi-VN"
+                      )}₫`,
+                  },
+                },
+              },
+            },
+          });
+        } catch (err) {
+          console.error("Lỗi khi tải thống kê doanh thu:", err);
+          alert("Không thể tải dữ liệu thống kê. Vui lòng thử lại sau.");
+        } finally {
+          loadingElement.style.display = "none";
+        }
+      }
+    </script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>

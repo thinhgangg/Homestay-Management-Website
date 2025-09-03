@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký đối tác</title>
+    <link rel="stylesheet" href="assets/css/partner-register.css" />
+  </head>
+  <body data-role="host">
+    <div class="container">
+      <div class="form-container">
+        <div class="form-title">ĐĂNG KÝ ĐỐI TÁC GO TRAVEL</div>
+        <p>
+          Sản phẩm dành riêng cho các đối tác của Go Travel <br />
+          giúp tối ưu hóa việc quản lý hoạt động của homestay
+        </p>
+        <form id="partner-register-form">
+          <div class="form-row">
+            <input type="text" id="registerName" placeholder="" />
+            <label for="registerName">Tên người dùng</label>
+          </div>
+          <small class="form-message">message</small>
+
+          <div class="form-row">
+            <input type="email" id="registerEmail" placeholder="" />
+            <label for="registerEmail">Email</label>
+          </div>
+          <small class="form-message">message</small>
+
+          <div class="form-row">
+            <input type="password" id="registerPassword" placeholder="" />
+            <label for="registerPassword">Mật khẩu</label>
+            <img src="/assets/img/icon/eye.svg" alt="" class="show-hide-btn" />
+          </div>
+          <small class="form-message">message</small>
+
+          <div class="form-row">
+            <input type="password" id="confirmPassword" placeholder="" />
+            <label for="confirmPassword">Nhập lại mật khẩu</label>
+          </div>
+          <small class="form-message">message</small>
+          <button class="submit-register-btn">Đăng Ký</button>
+        </form>
+
+        <p class="hotline">
+          Bạn cần hỗ trợ? Hotline: <a href="tel:02838270404">028 3827 0404</a>
+        </p>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-content">
+          <div class="slide">
+            <img src="assets/img/partner-register-1.png" alt="" />
+            <p class="slide-text">
+              Đăng ký cho thuê phòng nhanh và hoàn toàn miễn phí
+            </p>
+          </div>
+          <div class="slide">
+            <img src="assets/img/partner-register-2.png" alt="" />
+            <p class="slide-text">
+              Tiếp cận được nhiều khách hàng tiềm năng hơn
+            </p>
+          </div>
+          <div class="slide">
+            <img src="assets/img/partner-register-3.png" alt="" />
+            <p class="slide-text">
+              Trang OTA với hệ thống quản lý thông minh, tối ưu tốt
+            </p>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <div class="pagination-dot active" onclick="goToSlide(0)"></div>
+          <div class="pagination-dot" onclick="goToSlide(1)"></div>
+          <div class="pagination-dot" onclick="goToSlide(2)"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="assets/js/register.js"></script>
+  <script type="module" src="assets/js/partner-register.js"></script>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển</title>
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css" />
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css" />
+    <script src="assets/js/restrictPageAccess.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="container1">
+          <div class="header-content">
+            <div class="logo">
+              <a href="trang-chu.html">
+                <img src="assets/img/gotravel_logo_air.png" alt="" />
+              </a>
+            </div>
+            <nav class="nav">
+              <ul>
+                <li><a href="trang-chu.html">TRANG CHỦ</a></li>
+                <li><a href="homestay-list.html">HOMESTAYS</a></li>
+                <li><a href="about.html" target="_blank">VỀ CHÚNG TÔI</a></li>
+                <li><a href="contact.html" target="_blank">LIÊN HỆ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="btns desktop-btns" id="auth-buttons">
+          <button class="cooperate-btn" onclick="location.href='partnership.html'">Hợp tác với chúng tôi</button>
+          <button class="dang-ky-btn signup" id="registerBtn">Đăng ký</button>
+          <button class="dang-nhap-btn login" id="loginBtn">Đăng nhập</button>
+        </div>
+
+        <div id="user-info" class="user-dropdown" style="display: none; position: relative">
+          <img src="/assets/img/icon/user.svg" alt="user-icon" id="user-icon" />
+          <div id="user-menu" class="dropdown-menu">
+            <a href="#" id="profileLink" class="dropdown-item">Hồ sơ</a>
+            <button id="logoutBtn" class="dropdown-item">Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Sidebar Menu -->
+      <div class="sidebar">
+        <h2>Bảng điều khiển Admin</h2>
+        <ul>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-approve-business">Yêu cầu phê duyệt</a>
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-manage-company">Quản lý doanh nghiệp</a>
+          </li>
+          <li>
+            <a href="#" class="tab-link" data-tab="tab-manage-users">Quản lý người dùng</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div id="default-content" class="tab-content active">
+          <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Welcome" />
+          <h1>Chào mừng bạn đến với GoTravel</h1>
+          <h3>Admin Dashboard</h3>
+        </div>
+
+        <div id="tab-approve-business" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Phê duyệt doanh nghiệp</h2>
+            <div id="homestay-request-container" class="host-container"></div>
+          </div>
+        </div>
+
+        <div id="tab-manage-company" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Quản lý doanh nghiệp</h2>
+            <div id="host-container" class="host-container"></div>
+          </div>
+        </div>
+        
+        <div id="tab-manage-users" class="tab-content">
+          <div class="card-box">
+            <button class="close-btn" onclick="returnToDefault()">×</button>
+            <h2>Quản lý người dùng</h2>
+            <div id="user-container" class="host-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="common-popup" class="popup-overlay" style="display: none">
+      <div class="popup-content">
+        <button class="close-popup" onclick="closeCommonPopup()">×</button>
+        <h3 id="popup-title">Chi tiết</h3>
+        <div id="popup-body"></div>
+      </div>
+    </div>
+
+    <script>
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const defaultContent = document.getElementById("default-content");
+
+      tabLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          tabLinks.forEach((l) => l.classList.remove("active-tab"));
+          link.classList.add("active-tab");
+
+          tabContents.forEach((c) => c.classList.remove("active"));
+          const tabId = link.getAttribute("data-tab");
+          document.getElementById(tabId).classList.add("active");
+
+          defaultContent.classList.remove("active");
+        });
+      });
+
+      function returnToDefault() {
+        tabContents.forEach((tab) => tab.classList.remove("active"));
+
+        defaultContent.classList.add("active");
+
+        tabLinks.forEach((l) => l.classList.remove("active-tab"));
+        homestayToggles.forEach((toggle) => toggle.classList.remove("active-homestay"));
+
+        document.querySelectorAll(".sub-menu").forEach((menu) => (menu.style.display = "none"));
+
+        homestayList.style.display = "none";
+      }
+
+      function openCommonPopup(type, data) {
+        const title = document.getElementById("popup-title");
+        const body = document.getElementById("popup-body");
+
+        if (type === "business") {
+          title.innerText = "Chi tiết Doanh nghiệp";
+          body.innerHTML = `
+            <p><strong>Tên Homestay:</strong> ${data.name}</p>
+            <p><strong>Địa chỉ:</strong> ${data.address}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Ngày yêu cầu:</strong> ${data.note}</p>
+          `;
+        } else if (type === "user") {
+          title.innerText = "Chi tiết Người dùng";
+          body.innerHTML = `
+            <p><strong>ID:</strong> ${data.id}</p>
+            <p><strong>Tên:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+          `;
+        }
+
+        document.getElementById("common-popup").style.display = "flex";
+      }
+
+      function closeCommonPopup() {
+        document.getElementById("common-popup").style.display = "none";
+      }
+    </script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/role-redirect.js"></script>
+    <script type="module" src="assets/js/admin-homestay.js"></script>
+  </body>
+</html>
