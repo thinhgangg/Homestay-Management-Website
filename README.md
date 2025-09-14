@@ -1,4 +1,4 @@
-# 🏡 Homestay-Manager-Website-FE
+# 🏡 Homestay-Manager-Website
 
 This repository contains the **frontend** and **backend** of the **goTravel – Homestay Booking Management System**.  
 It provides an intuitive user interface for different roles (**Admin, Host, User**) and interacts seamlessly with the backend API.
